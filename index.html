@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="semantic/semantic.min.js"></script>
+
+    <title>Document</title>
+    <style type="text/css">
+      body > .ui.main.container {
+        margin-top: 9em;
+      }
+
+      .ui.fixed.menu {
+        background-color: black;
+        height: 80px;
+      }
+      iframe {
+        border: none;
+        width: calc(100% + 2em);
+        margin: 0em -1em;
+        height: 300px;
+      }
+      iframe html {
+        overflow: hidden;
+      }
+      iframe body {
+        padding: 0em;
+      }
+
+      .ui.main.container > h1 {
+        font-size: 3em;
+        text-align: center;
+        font-weight: normal;
+      }
+
+      .ui.main.container .ui.primary.message {
+        margin-bottom: 4em;
+      }
+
+      .ui.main.container .ui.middle {
+        border: 0.5px solid #d1d1d1;
+        border-radius: 5px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui fixed inverted menu">
+      <a href="index.html" class="header item"
+        ><img class="ui avatar image" src="./images/logo-nan.png" /> NaN |
+        FORUM</a
+      >
+    </div>
+    <div class="ui main container">
+      <div class="ui positive message">
+        <h1><i class="star icon"></i> Les derniers articles</h1>
+      </div>
+      <div class="ui middle aligned divided list">
+        <div id="itemEl" class="item">
+          <div class="right floated content">
+            <button id="slug" class="ui button">Repondre</button>
+          </div>
+          <img class="ui avatar image" src="./images/logo-nan.png" />
+          <div class="content">
+            <a href="" id="articleTitle" rel="noopener noreferrer">Article 1</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        <h5 id="showArticleTitle"></h5>
+      </div>
+      <div class="image content">
+        <div class="description">
+          <div id="articleSlug" class="ui header"></div>
+          <p id="articleContenu"></p>
+        </div>
+      </div>
+      <form style="margin: 20px;" action="" method="post">
+        <div class="ui form">
+          <div class="field">
+            <label>Message</label>
+            <textarea
+              style="resize: none;"
+              value=""
+              name="message"
+              id="message"
+              placeholder="Ecrire votre message ici ..."
+            ></textarea>
+          </div>
+        </div>
+      </form>
+      <div class="actions">
+        <button class="ui negative deny button">
+          Abandonner
+        </button>
+        <button id="answerButton" class="ui positive right labeled icon button">
+          Répondre
+          <i class="checkmark icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      var datas = jQuery.parseJSON(
+        '{"_id":1, "titre": "Article 1", "contenu": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit culpa officiis repellendus, tempore quia obcaecati vero fuga animi qui! Voluptas hic provident non est ut. Itaque temporibus architecto laborum! Esse." }'
+      );
+      $(document).ready(function () {
+        $("#slug").click(() => {
+          let modal = $(".ui.modal").modal("show");
+          if (modal) {
+            $("#showArticleTitle, #articleSlug").html(
+              "<center><p>" + datas.titre + "</p></center>"
+            );
+            $("#articleContenu").replaceWith(
+              "<center><p style='width: 500px; text-align: center; color:grey; word-wrap:break-word;'>" +
+                datas.contenu +
+                datas._id +
+                "</p></center>"
+            );
+            let t = $("#articleTitle").text();
+            $("#showArticleTitle").replaceWith(t);
+
+            $("#answerButton").click((e) => {
+              e.preventDefault();
+              let answers = {};
+              answers.highScore = 100000;
+              answers.contenu = $("#message").val();
+              if (answers.contenu === undefined || answers.contenu === "") {
+                return;
+              } else {
+                localStorage.setItem("ansWer", JSON.stringify(answers));
+                location.reload(true);
+              }
+              // save to json file
+            });
+          }
+        });
+
+        let retriev = JSON.parse(localStorage.getItem("ansWer"));
+        $("#itemEl").append(
+          "<div id='itemEl' class='item'>" +
+            "<div class='right floated content'><button id=" +
+            datas._id +
+            " class='ui button'>Repondre</button></div>" +
+            "<img class='ui avatar image' src='./images/logo-nan.png' />" +
+            "<div class='content'><a href='' id='articleTitle' rel='noopener noreferrer'>" +
+            retriev.contenu +
+            "</a></div>" +
+            "</div>"
+        );
+      });
+    </script>
+  </body>
+</html>
