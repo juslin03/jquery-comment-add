@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css" />
+    <link rel="stylesheet" href="style.css">
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -12,44 +13,6 @@
     <script src="semantic/semantic.min.js"></script>
 
     <title>Document</title>
-    <style type="text/css">
-      body > .ui.main.container {
-        margin-top: 9em;
-      }
-
-      .ui.fixed.menu {
-        background-color: black;
-        height: 80px;
-      }
-      iframe {
-        border: none;
-        width: calc(100% + 2em);
-        margin: 0em -1em;
-        height: 300px;
-      }
-      iframe html {
-        overflow: hidden;
-      }
-      iframe body {
-        padding: 0em;
-      }
-
-      .ui.main.container > h1 {
-        font-size: 3em;
-        text-align: center;
-        font-weight: normal;
-      }
-
-      .ui.main.container .ui.primary.message {
-        margin-bottom: 4em;
-      }
-
-      .ui.main.container .ui.middle {
-        border: 0.5px solid #d1d1d1;
-        border-radius: 5px;
-        padding: 10px;
-      }
-    </style>
   </head>
   <body>
     <div class="ui fixed inverted menu">
@@ -110,55 +73,6 @@
       </div>
     </div>
 
-    <script>
-      var datas = jQuery.parseJSON(
-        '{"_id":1, "titre": "Article 1", "contenu": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit culpa officiis repellendus, tempore quia obcaecati vero fuga animi qui! Voluptas hic provident non est ut. Itaque temporibus architecto laborum! Esse." }'
-      );
-      $(document).ready(function () {
-        $("#slug").click(() => {
-          let modal = $(".ui.modal").modal("show");
-          if (modal) {
-            $("#showArticleTitle, #articleSlug").html(
-              "<center><p>" + datas.titre + "</p></center>"
-            );
-            $("#articleContenu").replaceWith(
-              "<center><p style='width: 500px; text-align: center; color:grey; word-wrap:break-word;'>" +
-                datas.contenu +
-                datas._id +
-                "</p></center>"
-            );
-            let t = $("#articleTitle").text();
-            $("#showArticleTitle").replaceWith(t);
-
-            $("#answerButton").click((e) => {
-              e.preventDefault();
-              let answers = {};
-              answers.highScore = 100000;
-              answers.contenu = $("#message").val();
-              if (answers.contenu === undefined || answers.contenu === "") {
-                return;
-              } else {
-                localStorage.setItem("ansWer", JSON.stringify(answers));
-                location.reload(true);
-              }
-              // save to json file
-            });
-          }
-        });
-
-        let retriev = JSON.parse(localStorage.getItem("ansWer"));
-        $("#itemEl").append(
-          "<div id='itemEl' class='item'>" +
-            "<div class='right floated content'><button id=" +
-            datas._id +
-            " class='ui button'>Repondre</button></div>" +
-            "<img class='ui avatar image' src='./images/logo-nan.png' />" +
-            "<div class='content'><a href='' id='articleTitle' rel='noopener noreferrer'>" +
-            retriev.contenu +
-            "</a></div>" +
-            "</div>"
-        );
-      });
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>
