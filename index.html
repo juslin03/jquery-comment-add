@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -25,14 +25,15 @@
       <div class="ui positive message">
         <h1><i class="star icon"></i> Les derniers articles</h1>
       </div>
-      <div class="ui middle aligned divided list">
+      <div id="listDiscussion" class="ui middle aligned divided list">
         <div id="itemEl" class="item">
           <div class="right floated content">
             <button id="slug" class="ui button">Repondre</button>
           </div>
           <img class="ui avatar image" src="./images/logo-nan.png" />
           <div class="content">
-            <a href="" id="articleTitle" rel="noopener noreferrer">Article 1</a>
+            <a href="" id="articleTitle" rel="noopener noreferrer">Cuisiner</a> | <small style="color: grey;">Posté le : 20-03-2020</small>
+            <br><span class="ui comment"><small>Categorie: cuisine</small></span>
           </div>
         </div>
       </div>
@@ -50,6 +51,19 @@
       </div>
       <form style="margin: 20px;" action="" method="post">
         <div class="ui form">
+          <div class="field">
+            <label>Sujet</label>
+            <input id="titre" type="text" placeholder="Sujet">
+          </div>
+          <div class="field">
+            <label>Categorie</label>
+            <select id="categorie" class="ui search dropdown">
+              <option value="cuisine">cuisine</option>
+              <option value="étude">étude</option>
+              <option value="religion">religion</option>
+              <option value="santé">santé</option>
+            </select>
+          </div>
           <div class="field">
             <label>Message</label>
             <textarea
@@ -73,6 +87,12 @@
       </div>
     </div>
 
+    <script type="text/javascript">
+      // window.onload = function () {
+      //   $(`button`).removeClass();
+      //   alert("chargement")
+      // }
+    </script>
     <script src="script.js" defer></script>
   </body>
 </html>
