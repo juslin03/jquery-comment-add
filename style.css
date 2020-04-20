@@ -1,0 +1,36 @@
+body > .ui.main.container {
+    margin-top: 9em;
+  }
+
+  .ui.fixed.menu {
+    background-color: black;
+    height: 80px;
+  }
+  iframe {
+    border: none;
+    width: calc(100% + 2em);
+    margin: 0em -1em;
+    height: 300px;
+  }
+  iframe html {
+    overflow: hidden;
+  }
+  iframe body {
+    padding: 0em;
+  }
+
+  .ui.main.container > h1 {
+    font-size: 3em;
+    text-align: center;
+    font-weight: normal;
+  }
+
+  .ui.main.container .ui.primary.message {
+    margin-bottom: 4em;
+  }
+
+  .ui.main.container .ui.middle {
+    border: 0.5px solid #d1d1d1;
+    border-radius: 5px;
+    padding: 10px;
+  }
